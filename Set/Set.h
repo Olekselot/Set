@@ -86,6 +86,39 @@ inline size_t Set<T>::size() const
 }
 
 template<typename T>
+inline Set<T>& Set<T>::remove(const T& x) const
+{
+	// версія не фінальна і напевно не працює правильно скоро перероблю так як має бути
+	if (head == nullptr)
+	{
+		return *this;
+	}
+	Node* temp = head;
+	if (temp->value == x && temp->next == nullptr)
+	{
+		head = nullptr;
+		return *this;
+	}
+	else if (temp->value == x)
+	{
+		head = head->next;
+		delete temp;
+		return *this;
+	}
+	while (temp->next != nullptr)
+	{
+		if (temp->next->value == x)
+		{
+			Node* tempNext = temp->next;
+			temp->next = tempNext->next;
+			delete tempNext;
+			return *this;
+		}
+	}
+	return *this;
+}
+
+template<typename T>
 inline std::ostream& operator<<(std::ostream& out, const Set<T>& S)
 {
 	S.write_to(out);
