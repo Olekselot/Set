@@ -78,3 +78,9 @@ inline void Set<T>::write_to(std::ostream& out) const
 		temp = temp->next;
 	}
 }
+
+template<typename T>
+inline size_t Set<T>::size() const
+{
+	return size;
+}
