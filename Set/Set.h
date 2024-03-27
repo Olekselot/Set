@@ -13,11 +13,24 @@ private:
 	Node* head;
 	size_t size;
 public:
-	Set();
-	Set(const Set& S);
-	Set(T* elements, size_t n);
-	Set(T element);
-	~Set();
+	Set() :head(nullptr), size(0)
+	{}
+	Set(const Set& S) :head(S.head), size(S.size)
+	{}
+	Set(T* elements, size_t n)
+	{
+		head = new Node(elements[0]);
+		size = 1;
+		for (size_t i = 1; i < n; ++i)
+		{
+			add_element(elements[i]);
+			++size;
+		}
+	}
+	Set(T element)
+	{}
+	~Set()
+	{}
 	size_t size()const;
 	Set<T>& operator=(const Set& S);
 	Set<T>& add_element(T element);
@@ -40,15 +53,13 @@ template<typename T>
 inline Set<T>::Set(const Set& S): head(S.head), size(S.size) {}
 
 template<typename T>
-inline Set<T>& Set<T>::operator=(const Set& S)
-{
+inline Set<T>& Set<T>::operator=(const Set& S){
 	size = S.size;
 	this.set_union(S);
 
 }
 
 template<typename T>
-inline Set<T> Set<T>::set_union(const Set& S) const
-{
+inline Set<T> Set<T>::set_union(const Set& S) const{
 	return Set<T>();
 }
