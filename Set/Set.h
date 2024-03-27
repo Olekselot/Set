@@ -12,6 +12,7 @@ private:
 	};
 	Node* head;
 	size_t size;
+
 public:
 	Set() :head(nullptr), size(0)
 	{}
@@ -55,8 +56,8 @@ inline Set<T>::Set(const Set& S): head(S.head), size(S.size) {}
 template<typename T>
 inline Set<T>& Set<T>::operator=(const Set& S){
 	size = S.size;
+	head = new Node(nullptr);
 	this.set_union(S);
-
 }
 
 template<typename T>
