@@ -38,3 +38,17 @@ inline Set<T>::Set(): head(nullptr), size(0){}
 
 template<typename T>
 inline Set<T>::Set(const Set& S): head(S.head), size(S.size) {}
+
+template<typename T>
+inline Set<T>& Set<T>::operator=(const Set& S)
+{
+	size = S.size;
+	this.set_union(S);
+
+}
+
+template<typename T>
+inline Set<T> Set<T>::set_union(const Set& S) const
+{
+	return Set<T>();
+}
