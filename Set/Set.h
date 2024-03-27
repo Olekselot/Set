@@ -1,1 +1,34 @@
 #pragma once
+#include <iostream>
+template <typename T>
+class Set
+{
+private:
+	struct Node
+	{
+		T value;
+		Node* next;
+		Node(T val, Node* N = nullptr) value(V), next(N) {}
+	};
+	Node* head;
+	size_t size;
+public:
+	Set();
+	Set(const Set& S);
+	Set(T* elements, size_t n);
+	Set(T element);
+	~Set();
+	size_t size()const;
+	Set<T>& operator=(const Set& S);
+	Set<T>& add_element(T element);
+	Set<T>& add_range(T* elements, size_t n);
+	Set<T> set_union(const Set& S)const;
+	Set<T> set_difference(const Set& S)const;
+	Set<T> set_intersect(const Set& S)const;
+	Set<T> set_sum_diff(const Set& S)const;
+	bool is_valid(const T& x)const;
+	Set<T>& remove(const T& x)const;
+	void write_to(std::ostream& out)const;
+};
+template<typename T>
+std::ostream& operator<<(std::ostream& out, const Set<T>& S);
