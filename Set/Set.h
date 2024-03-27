@@ -84,3 +84,10 @@ inline size_t Set<T>::size() const
 {
 	return size;
 }
+
+template<typename T>
+inline std::ostream& operator<<(std::ostream& out, const Set<T>& S)
+{
+	S.write_to(out);
+	return out;
+}
