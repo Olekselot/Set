@@ -62,5 +62,8 @@ inline Set<T>& Set<T>::operator=(const Set& S){
 
 template<typename T>
 inline Set<T> Set<T>::set_union(const Set& S) const{
-	return Set<T>();
+	Set<T> New;
+
+
+	return New;
 }
