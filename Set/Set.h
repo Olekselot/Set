@@ -111,33 +111,28 @@ inline size_t Set<T>::size() const
 template<typename T>
 inline Set<T>& Set<T>::remove(const T& x) const
 {
-	// версія не фінальна і напевно не працює правильно скоро перероблю так як має бути
-	if (head == nullptr)
+	Node* curr = head;
+	Node* prev = nullptr;
+
+	while (curr != nullptr)
 	{
-		return *this;
-	}
-	Node* temp = head;
-	if (temp->value == x && temp->next == nullptr)
-	{
-		head = nullptr;
-		return *this;
-	}
-	else if (temp->value == x)
-	{
-		head = head->next;
-		delete temp;
-		return *this;
-	}
-	while (temp->next != nullptr)
-	{
-		if (temp->next->value == x)
+		if (curr->value == x)
 		{
-			Node* tempNext = temp->next;
-			temp->next = tempNext->next;
-			delete tempNext;
+			if (prev == nullptr)
+			{
+				head = curr->next;
+			}
+			else
+			{
+				prev->next = curr->next;
+			}
+			delete curr;
 			return *this;
 		}
+		prev = curr;
+		curr = curr->next;
 	}
+
 	return *this;
 }
 
