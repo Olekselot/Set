@@ -62,10 +62,33 @@ inline Set<T>& Set<T>::operator=(const Set& S){
 
 template<typename T>
 inline Set<T> Set<T>::set_union(const Set& S) const{
-	Set<T> New;
+	Set<T> unswer;
+	Node* first = this->head;
+	Node* second = S.head;
+	Node* third = unswer.head;
+	size_t ThisSize = S.size + this->size;
 
+	for (size_t i = 0; i <= ThisSize; ++i) {
+		if (first.Node->next == nullptr) {
+			for (i <= ThisSize; ++i){
 
-	return New;
+			}
+		}
+		else if (second.Node->next == nullptr) {
+			for (i <= ThisSize; ++i){
+
+			}
+		}
+		else if (first.Node->value == second.Node->vaue) {
+
+		}
+		else if (first.Node->value > second.Node->vaue) {
+
+		}
+		else {
+
+		}
+	}
 }
 template<typename T>
 inline void Set<T>::write_to(std::ostream& out) const
