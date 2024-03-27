@@ -64,3 +64,14 @@ template<typename T>
 inline Set<T> Set<T>::set_union(const Set& S) const{
 	return Set<T>();
 }
+template<typename T>
+inline void Set<T>::write_to(std::ostream& out) const
+{
+	// check if works correctly
+	Node* temp = head;
+	while (temp != nullptr)
+	{
+		out << temp->value << ' ';
+		temp = temp->next;
+	}
+}
