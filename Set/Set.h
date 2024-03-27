@@ -32,3 +32,9 @@ public:
 };
 template<typename T>
 std::ostream& operator<<(std::ostream& out, const Set<T>& S);
+
+template<typename T>
+inline Set<T>::Set(): head(nullptr), size(0){}
+
+template<typename T>
+inline Set<T>::Set(const Set& S): head(S.head), size(S.size) {}
