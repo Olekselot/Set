@@ -8,7 +8,7 @@ private:
 	{
 		T value;
 		Node* next;
-		Node(T val, Node* N = nullptr) value(V), next(N) {}
+		Node(T val, Node* N = nullptr): value(val), next(N) {}
 	};
 	Node* head;
 	size_t size;
