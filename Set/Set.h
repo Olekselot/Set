@@ -14,24 +14,11 @@ private:
 	size_t size;
 
 public:
-	Set() :head(nullptr), size(0)
-	{}
-	Set(const Set& S) :head(S.head), size(S.size)
-	{}
-	Set(T* elements, size_t n)
-	{
-		head = new Node(elements[0]);
-		size = 1;
-		for (size_t i = 1; i < n; ++i)
-		{
-			add_element(elements[i]);
-			++size;
-		}
-	}
-	Set(T element)
-	{}
-	~Set()
-	{}
+	Set();
+	Set(const Set& S);
+	Set(T* elements, size_t n);
+	Set(T element);
+	~Set();
 	size_t size()const;
 	Set<T>& operator=(const Set& S);
 	Set<T>& add_element(T element);
@@ -47,11 +34,53 @@ public:
 template<typename T>
 std::ostream& operator<<(std::ostream& out, const Set<T>& S);
 
-template<typename T>
-inline Set<T>::Set(): head(nullptr), size(0){}
+template <typename T>
+Set<T>::Set() : head(new Node(T ())), size(0) {}
 
 template<typename T>
-inline Set<T>::Set(const Set& S): head(S.head), size(S.size) {}
+Set<T>::Set(const Set& S): size(S.size)
+{
+	head = new Node(S.head->value);
+	Node* curr = S.head->next;
+	Node* temp = head;
+	while (curr != nullptr)
+	{
+		temp->next = new Node(curr->value);
+		temp = temp->next;
+		curr = curr->next;
+	}
+}
+
+template<typename T>
+Set<T>::Set(T* elements, size_t n): size(0)
+{
+	for (size_t i = 0; i < n; ++i)
+	{
+		if (!is_valid(elements[i]))
+		{
+			add_element(elements[i]);
+			++size;
+		}
+	}
+}
+
+template<typename T>
+Set<T>::Set(T element)
+{
+	head = new Node(element);
+	size = 1;
+}
+
+template<typename T>
+Set<T>::~Set()
+{
+	while (head != nullptr)
+	{
+		Node* victom = head;
+		head = head->next;
+		delete victom;
+	}
+}
 
 template<typename T>
 inline Set<T>& Set<T>::operator=(const Set& S){
