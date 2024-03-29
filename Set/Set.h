@@ -83,6 +83,156 @@ Set<T>::~Set()
 }
 
 template<typename T>
+inline Set<T>& Set<T>::add_element(T element)
+{
+	if (is_valid(element))
+		throw exception("This element is already in the set...Add_element funktion run into problem...");
+	else
+	{
+		if (head == nullptr || element < head->value)
+		{
+			head = new Node(element, head);
+		}
+		else
+		{
+			Node* curr = head;
+			while (curr->next != nullptr && curr->next->value < element)
+				curr = curr->next;
+			curr->next = new Node(element, curr->next);
+		}
+		++size;
+		return *this;
+	}
+}
+
+template <typename T>
+Set<T>& Set<T>::add_range(T* elements, size_t n)
+{
+	for (size_t i = 0; i < n; ++i)
+	{
+		if (!is_valid(elements[i]))
+		{
+			add_element(elements[i]);
+			++size;
+		}
+	}
+	return *this;
+}
+
+template<typename T>
+Set<T> Set<T>::set_difference(const Set& S)const
+{
+	Set<T> result;
+	Node* result_pointer = result.head;
+	Node* this_pointer = head;
+	Node* S_pointer = S.head;
+	while (this_pointer != nullptr && S_pointer != nullptr)
+	{
+		if (this_pointer->value < S_pointer->value)
+		{
+			result_pointer->next = new Node(this_pointer->value);
+			result_pointer = result_pointer->next;
+			this_pointer = this_pointer->next;
+		}
+		else if (this_pointer->value == S_pointer->value)
+		{
+			this_pointer = this_pointer->next;
+			S_pointer = S_pointer->next;
+		}
+		else if (S_pointer->value < this_pointer->value)
+		{
+			S_pointer = S_pointer->next;
+		}
+	}
+	while (this_pointer != nullptr)
+	{
+		result_pointer->next = new Node(this_pointer->value);
+		result_pointer = result_pointer->next;
+		this_pointer = this_pointer->next;
+	}
+	Node* victom = result.head;
+	result.head = result.head->next;
+	delete victom;
+	return result;
+}
+
+template<typename T>
+Set<T> Set<T>::set_sum_diff(const Set& S)const
+{
+	Set<T> result;
+	Node* this_pointer = head;
+	Node* S_pointer = S.head;
+	Node* result_pointer = result.head;
+	while (this_pointer != nullptr && S_pointer != nullptr)
+	{
+		if (this_pointer->value < S_pointer->value)
+		{
+			result_pointer->next = new Node(this_pointer->value);
+			result_pointer = result_pointer->next;
+			this_pointer = this_pointer->next;
+		}
+		else if (S_pointer->value < this_pointer->value)
+		{
+			result_pointer->next = new Node(S_pointer->value);
+			result_pointer = result_pointer->next;
+			S_pointer = S_pointer->next;
+		}
+		else if (this_pointer->value == S_pointer->value)
+		{
+			this_pointer = this_pointer->next;
+			S_pointer = S_pointer->next;
+		}
+	}
+	while (this_pointer != nullptr)
+	{
+		result_pointer->next = new Node(this_pointer->value);
+		this_pointer = this_pointer->next;
+		result_pointer = result_pointer->next;
+	}
+	while (S_pointer != nullptr)
+	{
+		result_pointer->next = new Node(S_pointer->value);
+		S_pointer = S_pointer->next;
+		result_pointer = result_pointer->next;
+	}
+	Node* victom = result.head;
+	result.head = result.head->next;
+	delete victom;
+	return result;
+}
+
+template <typename T>
+Set<T> Set<T>::set_intersect(const Set& S)const
+{
+	Set<T> result;
+	Node* this_pointer = head;
+	Node* S_pointer = S.head;
+	Node* result_pointer = result.head;
+	while (this_pointer != nullptr && S_pointer != nullptr)
+	{
+		if (this_pointer->value < S_pointer->value)
+		{
+			this_pointer = this_pointer->next;
+		}
+		else if (S_pointer->value < this_pointer->value)
+		{
+			S_pointer = S_pointer->next;
+		}
+		else if (this_pointer->value == S_pointer->value)
+		{
+			result_pointer->next = new Node(this_pointer->value);
+			result_pointer = result_pointer->next;
+			this_pointer = this_pointer->next;
+			S_pointer = S_pointer->next;
+		}
+	}
+	Node* victom = result.head;
+	result.head = result.head->next;
+	delete victom;
+	return result;
+}
+
+template<typename T>
 inline Set<T>& Set<T>::operator=(const Set& S){
 	size = S.size;
 	head = new Node(nullptr);
@@ -163,6 +313,23 @@ inline Set<T>& Set<T>::remove(const T& x) const
 	}
 
 	return *this;
+}
+
+template<typename T>
+bool Set<T>::is_valid(const T& x)const
+{
+	Node* curr = head;
+	bool validness = false;
+	while (curr != nullptr && curr->value <= x)
+	{
+		if (curr->value == x)
+		{
+			validness = true;
+			break;
+		}
+		curr = curr->next;
+	}
+	return validness;
 }
 
 template<typename T>
