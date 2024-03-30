@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <exception>
+using namespace std;
 template <typename T>
 class Set
 {
@@ -30,9 +32,43 @@ public:
 	bool is_valid(const T& x)const;
 	Set<T>& remove(const T& x)const;
 	void write_to(std::ostream& out)const;
+
+        //допоміжні функції для тестів
+        bool sets_are_equal(const Set<T>& A);
+        bool is_empty()const;
 };
 template<typename T>
 std::ostream& operator<<(std::ostream& out, const Set<T>& S);
+
+template<typename T>
+bool Set<T>::sets_are_equal(const Set<T>& A)
+{
+	bool equalty = true;
+	Node* this_ptr = head;
+	Node* A_pointer = A.head;
+	while (A_pointer != nullptr && this_ptr != nullptr)
+	{
+		if (A_pointer->value != this_ptr->value)
+		{
+			equalty = false;
+			break;
+		}
+		A_pointer = A_pointer->next;
+		this_ptr = this_ptr->next;
+	}
+	if (A_pointer != nullptr || this_ptr != nullptr)
+		equalty = false;
+	return equalty;
+}
+
+template<typename T>
+bool Set<T>::is_empty()const
+{
+	if (head == nullptr)
+		return true;
+	else
+		return false;
+}
 
 template <typename T>
 Set<T>::Set() : head(new Node(T ())), size(0) {}
@@ -59,11 +95,9 @@ Set<T>::Set(T* elements, size_t n): size(0)
 		if (!is_valid(elements[i]))
 		{
 			add_element(elements[i]);
-			++size;
 		}
 	}
 }
-
 template<typename T>
 Set<T>::Set(T element)
 {
@@ -113,7 +147,6 @@ Set<T>& Set<T>::add_range(T* elements, size_t n)
 		if (!is_valid(elements[i]))
 		{
 			add_element(elements[i]);
-			++size;
 		}
 	}
 	return *this;
@@ -132,6 +165,7 @@ Set<T> Set<T>::set_difference(const Set& S)const
 		{
 			result_pointer->next = new Node(this_pointer->value);
 			result_pointer = result_pointer->next;
+			++result.size;
 			this_pointer = this_pointer->next;
 		}
 		else if (this_pointer->value == S_pointer->value)
@@ -148,6 +182,7 @@ Set<T> Set<T>::set_difference(const Set& S)const
 	{
 		result_pointer->next = new Node(this_pointer->value);
 		result_pointer = result_pointer->next;
+		++result.size;
 		this_pointer = this_pointer->next;
 	}
 	Node* victom = result.head;
@@ -169,12 +204,14 @@ Set<T> Set<T>::set_sum_diff(const Set& S)const
 		{
 			result_pointer->next = new Node(this_pointer->value);
 			result_pointer = result_pointer->next;
+			++result.size;
 			this_pointer = this_pointer->next;
 		}
 		else if (S_pointer->value < this_pointer->value)
 		{
 			result_pointer->next = new Node(S_pointer->value);
 			result_pointer = result_pointer->next;
+			++result.size;
 			S_pointer = S_pointer->next;
 		}
 		else if (this_pointer->value == S_pointer->value)
@@ -188,12 +225,14 @@ Set<T> Set<T>::set_sum_diff(const Set& S)const
 		result_pointer->next = new Node(this_pointer->value);
 		this_pointer = this_pointer->next;
 		result_pointer = result_pointer->next;
+		++result.size;
 	}
 	while (S_pointer != nullptr)
 	{
 		result_pointer->next = new Node(S_pointer->value);
 		S_pointer = S_pointer->next;
 		result_pointer = result_pointer->next;
+		++result.size;
 	}
 	Node* victom = result.head;
 	result.head = result.head->next;
@@ -222,6 +261,7 @@ Set<T> Set<T>::set_intersect(const Set& S)const
 		{
 			result_pointer->next = new Node(this_pointer->value);
 			result_pointer = result_pointer->next;
+			++result.size;
 			this_pointer = this_pointer->next;
 			S_pointer = S_pointer->next;
 		}
@@ -231,7 +271,6 @@ Set<T> Set<T>::set_intersect(const Set& S)const
 	delete victom;
 	return result;
 }
-
 template<typename T>
 inline Set<T>& Set<T>::operator=(const Set& S){
 	size = S.size;
