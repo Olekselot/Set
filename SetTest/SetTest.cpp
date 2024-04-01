@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
+#include "..\Set\set.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
