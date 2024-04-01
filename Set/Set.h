@@ -30,7 +30,7 @@ public:
 	Set<T> set_intersect(const Set& S)const;
 	Set<T> set_sum_diff(const Set& S)const;
 	bool is_valid(const T& x)const;
-	Set<T>& remove(const T& x)const;
+	Set<T>& remove(const T& x);
 	void write_to(std::ostream& out)const;
 
         //допоміжні функції для тестів
@@ -327,7 +327,7 @@ inline size_t Set<T>::size() const
 }
 
 template<typename T>
-inline Set<T>& Set<T>::remove(const T& x) const
+inline Set<T>& Set<T>::remove(const T& x)
 {
 	Node* curr = head;
 	Node* prev = nullptr;
@@ -345,6 +345,7 @@ inline Set<T>& Set<T>::remove(const T& x) const
 				prev->next = curr->next;
 			}
 			delete curr;
+			--size;
 			return *this;
 		}
 		prev = curr;
