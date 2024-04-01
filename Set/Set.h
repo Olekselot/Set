@@ -352,7 +352,7 @@ inline Set<T>& Set<T>::remove(const T& x)
 		curr = curr->next;
 	}
 
-	return *this;
+	throw std::out_of_range("Element not found in set");
 }
 
 template<typename T>
