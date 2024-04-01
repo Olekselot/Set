@@ -47,47 +47,47 @@ namespace SetTest
 			size_t m = sizeof other_arr / sizeof other_arr[0];
 			Set<int> D(other_arr, m);
 
-			Assert::IsTrue(T.sets_are_equal(D));
-		}
-		TEST_METHOD(TestingAddRangeForChar)
-		{
-			Set<char> Chars("abcdefg", 7);
-			Chars.add_range("efght", 5);
-			Set<char> result("abcdefght", 9);
-			Assert::IsTrue(Chars.sets_are_equal(result));
-			Assert::AreEqual((size_t)9, Chars.size_of_set());
-		}
-		TEST_METHOD(TestingSetDifference)
-		{
-			int arr[] = { 9,5,1,3 };
-			size_t n = sizeof arr / sizeof arr[0];
-			Set<int> T(arr, n);
+	Assert::IsTrue(T.sets_are_equal(D));
+}
+	TEST_METHOD(TestingAddRangeForChar)
+{
+	Set<char> Chars("abcdefg", 7);
+	Chars.add_range("efght", 5);
+	Set<char> result("abcdefght", 9);
+	Assert::IsTrue(Chars.sets_are_equal(result));
+	Assert::AreEqual((size_t)9, Chars.size_of_set());
+}
+	TEST_METHOD(TestingSetDifference)
+	{
+		int arr[] = { 9,5,1,3 };
+		size_t n = sizeof arr / sizeof arr[0];
+		Set<int> T(arr, n);
 
-			int other_arr[] = { 9,5,1,3 };
-			size_t m = sizeof other_arr / sizeof other_arr[0];
-			Set<int> D(other_arr, m);
+	int other_arr[] = { 9,5,1,3 };
+	size_t m = sizeof other_arr / sizeof other_arr[0];
+	Set<int> D(other_arr, m);
 
-			Set<int> Diff = T.set_difference(D);
-			Assert::IsTrue(Diff.is_empty());
-			Assert::AreEqual(Diff.size_of_set(), (size_t)0);
+	Set<int> Diff = T.set_difference(D);
+	Assert::IsTrue(Diff.is_empty());
+	Assert::AreEqual(Diff.size_of_set(), (size_t)0);
 
-			int another_arr[] = { 9,5,1,3,2,56,66 };
-			size_t k = sizeof another_arr / sizeof another_arr[0];
-			Set<int> A(another_arr, k);
+	int another_arr[] = { 9,5,1,3,2,56,66 };
+	size_t k = sizeof another_arr / sizeof another_arr[0];
+	Set<int> A(another_arr, k);
 
-			int diff_arr[] = { 2,56,66 };
-			size_t d = sizeof diff_arr / sizeof diff_arr[0];
-			Set<int> B(diff_arr, d);
+	int diff_arr[] = { 2,56,66 };
+	size_t d = sizeof diff_arr / sizeof diff_arr[0];
+	Set<int> B(diff_arr, d);
 
-			Set<int> C = A.set_difference(D);
-			Assert::IsTrue(C.sets_are_equal(B));
-			Assert::AreEqual(C.size_of_set(), (size_t)3);
-		}
-		TEST_METHOD(TestingSetIntersection)
-		{
-			int arr[] = { 9,5,1,3 };
-			size_t n = sizeof arr / sizeof arr[0];
-			Set<int> T(arr, n);
+	Set<int> C = A.set_difference(D);
+	Assert::IsTrue(C.sets_are_equal(B));
+	Assert::AreEqual(C.size_of_set(), (size_t)3);
+}
+	TEST_METHOD(TestingSetIntersection)
+{
+	int arr[] = { 9,5,1,3 };
+	size_t n = sizeof arr / sizeof arr[0];
+	Set<int> T(arr, n);
 
 			int another_arr[] = { 111,222,333,444 };
 			size_t a = sizeof another_arr / sizeof another_arr[0];
@@ -164,5 +164,5 @@ namespace SetTest
 			}
 		}
 	};
-
+       
 }

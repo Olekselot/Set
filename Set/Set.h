@@ -34,8 +34,8 @@ public:
 	void write_to(std::ostream& out)const;
 
         //допоміжні функції для тестів
-        bool sets_are_equal(const Set<T>& A);
-        bool is_empty()const;
+    bool sets_are_equal(const Set<T>& A);
+    bool is_empty()const;
 };
 template<typename T>
 std::ostream& operator<<(std::ostream& out, const Set<T>& S);
@@ -74,9 +74,11 @@ template <typename T>
 Set<T>::Set() : head(new Node(T ())), size(0) {}
 
 template<typename T>
-Set<T>::Set(const Set& S) : size(S.size), head(nullptr)
+Set<T>::Set(const Set& S) : size(S.size)
 {
-	if (S.head != nullptr)
+	if (S.head == nullptr)
+		head = nullptr;
+	else
 	{
 		head = new Node(S.head->value);
 		Node* curr = S.head->next;
@@ -326,7 +328,7 @@ inline void Set<T>::write_to(std::ostream& out) const
 template<typename T>
 inline size_t Set<T>::size_of_set() const
 {
-	return size;
+	return this->size;
 }
 
 template<typename T>
