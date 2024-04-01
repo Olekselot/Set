@@ -21,7 +21,7 @@ public:
 	Set(T* elements, size_t n);
 	Set(T element);
 	~Set();
-	size_t size()const;
+	size_t size_of_set()const;
 	Set<T>& operator=(const Set& S);
 	Set<T>& add_element(T element);
 	Set<T>& add_range(T* elements, size_t n);
@@ -321,7 +321,7 @@ inline void Set<T>::write_to(std::ostream& out) const
 }
 
 template<typename T>
-inline size_t Set<T>::size() const
+inline size_t Set<T>::size_of_set() const
 {
 	return size;
 }
