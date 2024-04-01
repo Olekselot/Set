@@ -74,16 +74,19 @@ template <typename T>
 Set<T>::Set() : head(new Node(T ())), size(0) {}
 
 template<typename T>
-Set<T>::Set(const Set& S): size(S.size)
+Set<T>::Set(const Set& S) : size(S.size), head(nullptr)
 {
-	head = new Node(S.head->value);
-	Node* curr = S.head->next;
-	Node* temp = head;
-	while (curr != nullptr)
+	if (S.head != nullptr)
 	{
-		temp->next = new Node(curr->value);
-		temp = temp->next;
-		curr = curr->next;
+		head = new Node(S.head->value);
+		Node* curr = S.head->next;
+		Node* temp = head;
+		while (curr != nullptr)
+		{
+			temp->next = new Node(curr->value);
+			temp = temp->next;
+			curr = curr->next;
+		}
 	}
 }
 
