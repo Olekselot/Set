@@ -9,7 +9,42 @@ namespace SetTest
 	TEST_CLASS(SetTest)
 	{
 	public:
+		TEST_METHOD(TestingDefaultCreation)
+		{
+			Set<int> IntSet;
+			Assert::AreEqual(IntSet.size_of_set(), (size_t)0);
+			Set<char> CharSet;
+			Assert::AreEqual(CharSet.size_of_set(), (size_t)0);
+		}
+		TEST_METHOD(TestCopyConstructor)
+		{
+			Set<char> MySet("abcdefg", 7);
+			Set<char> Copied(MySet);
+			Assert::IsTrue(MySet.sets_are_equal(Copied));
+			Assert::AreEqual(MySet.size_of_set(), Copied.size_of_set());
+		}
+		TEST_METHOD(TestRangeConstructor)
+		{
+			Set<char> MySet("abcdefg", 7);
+			Assert::IsTrue(MySet.is_valid('a'));
+			Assert::IsTrue(MySet.is_valid('b'));
+			Assert::IsTrue(MySet.is_valid('c'));
+			Assert::IsTrue(MySet.is_valid('d'));
+			Assert::IsTrue(MySet.is_valid('e'));
+			Assert::IsTrue(MySet.is_valid('f'));
+			Assert::IsTrue(MySet.is_valid('g'));
+			Assert::AreEqual(MySet.size_of_set(), (size_t)7);
+		}
+		TEST_METHOD(TestingElementConstructor)
+		{
+			Set<char> MySet('a');
+			Assert::AreEqual(MySet.size_of_set(), (size_t)1);
+			Assert::IsTrue(MySet.is_valid('a'));
 
+			Set<std::string> StringSet("Olya");
+			Assert::AreEqual(StringSet.size_of_set(), (size_t)1);
+			Assert::IsTrue(StringSet.is_valid("Olya"));
+		}
 		TEST_METHOD(TestingAddElement)
 		{
 			int arr[] = { 11,56,78,9,3,44,56,7,9,5,1 };
