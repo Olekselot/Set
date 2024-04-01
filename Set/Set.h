@@ -10,7 +10,7 @@ private:
 	{
 		T value;
 		Node* next;
-		Node(T val, Node* N = nullptr): value(val), next(N) {}
+		Node(T val, Node* N = nullptr) : value(val), next(N) {}
 	};
 	Node* head;
 	size_t size;
@@ -33,9 +33,9 @@ public:
 	Set<T>& remove(const T& x);
 	void write_to(std::ostream& out)const;
 
-        //допоміжні функції для тестів
-    bool sets_are_equal(const Set<T>& A);
-    bool is_empty()const;
+	//допоміжні функції для тестів
+	bool sets_are_equal(const Set<T>& A);
+	bool is_empty()const;
 };
 template<typename T>
 std::ostream& operator<<(std::ostream& out, const Set<T>& S);
@@ -71,7 +71,7 @@ bool Set<T>::is_empty()const
 }
 
 template <typename T>
-Set<T>::Set() : head(new Node(T ())), size(0) {}
+Set<T>::Set() : head(new Node(T())), size(0) {}
 
 template<typename T>
 Set<T>::Set(const Set& S) : size(S.size)
@@ -93,7 +93,7 @@ Set<T>::Set(const Set& S) : size(S.size)
 }
 
 template<typename T>
-Set<T>::Set(T* elements, size_t n): size(0)
+Set<T>::Set(T* elements, size_t n) : size(0)
 {
 	for (size_t i = 0; i < n; ++i)
 	{
@@ -277,14 +277,14 @@ Set<T> Set<T>::set_intersect(const Set& S)const
 	return result;
 }
 template<typename T>
-inline Set<T>& Set<T>::operator=(const Set& S){
+inline Set<T>& Set<T>::operator=(const Set& S) {
 	size = S.size;
 	head = new Node(nullptr);
 	this.set_union(S);
 }
 
 template<typename T>
-inline Set<T> Set<T>::set_union(const Set& S) const{
+inline Set<T> Set<T>::set_union(const Set& S) const {
 	Set<T> unswer;
 	Node* first = this->head;
 	Node* second = S.head;
@@ -293,12 +293,12 @@ inline Set<T> Set<T>::set_union(const Set& S) const{
 
 	for (size_t i = 0; i <= ThisSize; ++i) {
 		if (first.Node->next == nullptr) {
-			for (i <= ThisSize; ++i){
+			for (i <= ThisSize; ++i) {
 
 			}
 		}
 		else if (second.Node->next == nullptr) {
-			for (i <= ThisSize; ++i){
+			for (i <= ThisSize; ++i) {
 
 			}
 		}
