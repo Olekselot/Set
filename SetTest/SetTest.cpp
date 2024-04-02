@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "..\Set\set.h"
+#include <sstream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -197,6 +198,25 @@ namespace SetTest
 				Assert::AreEqual("Element not found in set", error.what());
 				Assert::AreEqual((size_t)3, set.size_of_set());
 			}
+		}
+		TEST_METHOD(TestingPrint)
+		{
+			int arr[] = { 1,2,3,4,5,6,7,8 };
+			Set<int> A(arr, 8);
+			std::ostringstream out;
+			A.write_to(out);
+			Assert::AreEqual("1 2 3 4 5 6 7 8 ", out.str().c_str());
+			out.str("");
+
+			Set<char> Chars("abcdefg", 7);
+			Chars.write_to(out);
+			Assert::AreEqual("a b c d e f g ", out.str().c_str());
+			out.str("");
+
+			string names[] = { "Artur","Artem","Ivan","Oleg" };
+			Set<std::string> Names(names, 4);
+			Names.write_to(out);
+			Assert::AreEqual("Artem Artur Ivan Oleg ", out.str().c_str());
 		}
 	};
 
