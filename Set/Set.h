@@ -300,11 +300,11 @@ inline Set<T> Set<T>::set_union(const Set& S) const {
 	size_t ThisSize = S.size + this->size;
 	while (first != nullptr && second != nullptr)
 	{
-		if (first->value < second->vaue) {
+		if (first->value < second->value) {
 			third->next = new Node(first->value);
 			first = first->next;
 		}
-		else if (first->value > second->vaue) {
+		else if (first->value > second->value) {
 			third->next = new Node(second->value);
 			second = second->next;
 		}
