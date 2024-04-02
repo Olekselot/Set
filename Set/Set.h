@@ -72,7 +72,7 @@ bool Set<T>::is_empty()const
 }
 
 template <typename T>
-Set<T>::Set() : head(new Node(T())), size(0) {}
+Set<T>::Set() : head(nullptr), size(0) {}
 
 template<typename T>
 Set<T>::Set(const Set& S) : size(S.size)
@@ -318,13 +318,13 @@ inline Set<T> Set<T>::set_union(const Set& S) const {
 		third = third->next;
 		++unswer.size;
 	}
-	while(first != nulptr){
+	while(first != nullptr){
 		third->next = new Node(first->value);
 		first = first->next;
 		third = third->next;
 		++unswer.size;
 	}
-	while (second != nulptr) {
+	while (second != nullptr) {
 		third->next = new Node(second->value);
 		second = second->next;
 		third = third->next;
