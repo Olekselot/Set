@@ -295,33 +295,43 @@ inline Set<T>& Set<T>::operator=(const Set& S) {
 template<typename T>
 inline Set<T> Set<T>::set_union(const Set& S) const {
 	Set<T> unswer;
-	Node* first = this->head;
-	Node* second = S.head;
+	Node* first = this->head->next;
+	Node* second = S.head->next;
 	Node* third = unswer.head;
 	size_t ThisSize = S.size + this->size;
-
-	for (size_t i = 0; i <= ThisSize; ++i) {
-		if (first.Node->next == nullptr) {
-			for (i <= ThisSize; ++i) {
-
-			}
+	while (first != nullptr && second != nullptr)
+	{
+		if (first->value < second->vaue) {
+			third->next = new Node(first->value);
+			first = first->next;
 		}
-		else if (second.Node->next == nullptr) {
-			for (i <= ThisSize; ++i) {
-
-			}
-		}
-		else if (first.Node->value == second.Node->vaue) {
-
-		}
-		else if (first.Node->value > second.Node->vaue) {
-
+		else if (first->value > second->vaue) {
+			third->next = new Node(second->value);
+			second = second->next;
 		}
 		else {
-
+			third->next = new Node(first->value);
+			first = first->next;
+			second = second->next;
 		}
+		third = third->next;
+		++unswer.size;
 	}
+	while(first != nulptr){
+		third->next = new Node(first->value);
+		first = first->next;
+		third = third->next;
+		++unswer.size;
+	}
+	while (second != nulptr) {
+		third->next = new Node(second->value);
+		second = second->next;
+		third = third->next;
+		++unswer.size;
+	}
+	return third;
 }
+
 template<typename T>
 inline void Set<T>::write_to(std::ostream& out) const
 {
