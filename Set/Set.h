@@ -288,8 +288,6 @@ Set<T> Set<T>::set_intersect(const Set& S)const
 template<typename T>
 inline Set<T>& Set<T>::operator=(const Set& S) {
 	this.clear_set();
-	size = S.size;
-	head = new Node(nullptr);
 	this.set_union(S);
 }
 
