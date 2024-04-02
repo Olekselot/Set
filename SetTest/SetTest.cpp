@@ -227,7 +227,17 @@ namespace SetTest
 		}
 		TEST_METHOD(TestingSetUnion)
 		{
+			int arr1[] = { 1,2,3,4,5,7,8 };
+			int arr2[] = { 2,4,6,8,10,12,14 };
+			int arr3[] = { 1,2,3,4,5,6,7,8,10,12,14 };
 
+			Set<int> A(arr1, 7);
+			Set<int> B(arr2, 7);
+			Set<int> C(arr3, 11);
+
+			A.set_union(B);
+			Assert::AreEqual((size_t)11, A.size_of_set());
+			Assert::IsTrue(A.sets_are_equal(C));
 		}
 	};
 
