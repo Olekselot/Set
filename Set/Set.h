@@ -72,7 +72,7 @@ bool Set<T>::is_empty()const
 }
 
 template <typename T>
-Set<T>::Set() : head(nullptr), size(0) {}
+Set<T>::Set() : head(new Node(T())), size(0) {}
 
 template<typename T>
 Set<T>::Set(const Set& S) : size(S.size)
@@ -287,7 +287,11 @@ Set<T> Set<T>::set_intersect(const Set& S)const
 }
 template<typename T>
 inline Set<T>& Set<T>::operator=(const Set& S) {
-	this.clear_set();
+	while (head == nullptr){
+Node* victom = head;
+head = head->next;
+delete victom;
+
 	this.set_union(S);
 }
 
@@ -297,7 +301,6 @@ inline Set<T> Set<T>::set_union(const Set& S) const {
 	Node* first = this->head->next;
 	Node* second = S.head->next;
 	Node* third = unswer.head;
-	size_t ThisSize = S.size + this->size;
 	while (first != nullptr && second != nullptr)
 	{
 		if (first->value < second->value) {
