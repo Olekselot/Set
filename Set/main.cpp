@@ -1,8 +1,11 @@
 #include <iostream>
-
+#include "Set.h"
+using namespace std;
 int main()
 {
-
-  system("pause");
-  return 0;
+	Set<int> A;
+	A.add_element(1).add_element(3);
+	cout << A << endl;
+	/* system("pause");*/
+	return 0;
 }

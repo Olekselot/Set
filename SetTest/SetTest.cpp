@@ -36,6 +36,13 @@ namespace SetTest
 			Assert::IsTrue(MySet.is_valid('g'));
 			Assert::AreEqual(MySet.size_of_set(), (size_t)7);
 		}
+		TEST_METHOD(TestClear)
+		{
+			int arr[] = { 9,5,1,3 };
+			Set<int> A(arr, 4);
+			A.clear_set();
+			Assert::IsTrue(A.is_empty());
+		}
 		TEST_METHOD(TestingElementConstructor)
 		{
 			Set<char> MySet('a');

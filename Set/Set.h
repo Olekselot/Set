@@ -25,6 +25,7 @@ public:
 	Set<T>& operator=(const Set& S);
 	Set<T>& add_element(T element);
 	Set<T>& add_range(T* elements, size_t n);
+	Set<T>& clear_set();
 	Set<T> set_union(const Set& S)const;
 	Set<T> set_difference(const Set& S)const;
 	Set<T> set_intersect(const Set& S)const;
@@ -113,12 +114,7 @@ Set<T>::Set(T element)
 template<typename T>
 Set<T>::~Set()
 {
-	while (head != nullptr)
-	{
-		Node* victom = head;
-		head = head->next;
-		delete victom;
-	}
+	this->clear_set();
 }
 
 template<typename T>
@@ -154,6 +150,19 @@ Set<T>& Set<T>::add_range(T* elements, size_t n)
 			add_element(elements[i]);
 		}
 	}
+	return *this;
+}
+
+template<typename T>
+Set<T>& Set<T>::clear_set()
+{
+	while (head != nullptr)
+	{
+		Node* victom = head;
+		head = head->next;
+		delete victom;
+	}
+	this->size = 0;
 	return *this;
 }
 
