@@ -225,6 +225,10 @@ namespace SetTest
 			Names.write_to(out);
 			Assert::AreEqual("Artem Artur Ivan Oleg ", out.str().c_str());
 		}
+		TEST_METHOD(TestingSetUnion)
+		{
+
+		}
 	};
 
 }
