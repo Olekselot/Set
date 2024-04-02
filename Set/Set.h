@@ -328,7 +328,7 @@ inline Set<T> Set<T>::set_union(const Set& S) const {
 		third = third->next;
 		++unswer.size;
 	}
-	return third;
+	return unswer;
 }
 
 template<typename T>
