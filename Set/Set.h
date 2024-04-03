@@ -156,12 +156,13 @@ Set<T>& Set<T>::add_range(T* elements, size_t n)
 template<typename T>
 Set<T>& Set<T>::clear_set()
 {
-	while (head != nullptr)
+	Node* victom = head->next;
+	while (victom != nullptr)
 	{
-		Node* victom = head;
-		head = head->next;
+		victom = victom->next;
 		delete victom;
 	}
+	head->next = nullptr;
 	this->size = 0;
 	return *this;
 }
