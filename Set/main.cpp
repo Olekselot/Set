@@ -45,7 +45,7 @@ int main() {
         productUnion = productUnion.set_intersect(storeAssortment[i]);
     }
     
-    std::cout << productUnion << std::endl;
+    std::cout << "Products in all the shops: " << productUnion << std::endl;
 
     return 0;
 }
