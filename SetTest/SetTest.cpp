@@ -237,6 +237,19 @@ namespace SetTest
 			Set<int>D(A.set_union(B));
 			Assert::AreEqual((size_t)10, D.size_of_set());
 		}
+		TEST_METHOD(TestingOperator)
+		{
+			int arr[] = { 11,56,78,9,3,44,56,7,9,5,1 };
+			Set<int> A(arr, 11);
+			Set<int> B = A;
+			Assert::IsTrue(A.sets_are_equal(B));
+			Assert::AreEqual(A.size_of_set(), B.size_of_set());
+
+			Set<char> C("abcdefg", 7);
+			Set<char> D = C;
+			Assert::IsTrue(C.sets_are_equal(D));
+			Assert::AreEqual(C.size_of_set(), D.size_of_set());
+		}
 	};
 
 }

@@ -286,12 +286,21 @@ Set<T> Set<T>::set_intersect(const Set& S)const
 	return result;
 }
 template<typename T>
-inline Set<T>& Set<T>::operator=(const Set& S) {
-	this->clear_set();
-	this->head = new Node(T());
-	return this.set_union(S);
+Set<T>& Set<T>::operator=(const Set& S)
+{
+	if (this != &S)
+	{
+		this->clear_set();
+		size = S.size;
+		Node* curr = S.head;
+		while (curr != nullptr)
+		{
+			this->add_element(curr->value);
+			curr = curr->next;
+		}
+	}
+	return *this;
 }
-
 template<typename T>
 inline Set<T> Set<T>::set_union(const Set& S) const {
 	Set<T> unswer;

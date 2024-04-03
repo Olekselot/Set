@@ -8,7 +8,6 @@ int main() {
     Set<int> set2;
     Set<int> set3;
 
-
     set1.add_element(1).add_element(2).add_element(3);
     set2.add_element(2).add_element(3).add_element(4);
     set3.add_element(3).add_element(4).add_element(5);
