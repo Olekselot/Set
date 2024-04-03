@@ -235,7 +235,8 @@ namespace SetTest
 			Set<int> B(arr2, 7);
 			Set<int> C(arr3, 11);
 			Set<int>D(A.set_union(B));
-			Assert::AreEqual((size_t)10, D.size_of_set());
+			Assert::AreEqual((size_t)11, D.size_of_set());
+			Assert::IsTrue(C.sets_are_equal(D));
 		}
 		TEST_METHOD(TestingOperator)
 		{
