@@ -125,9 +125,9 @@ inline Set<T>& Set<T>::add_element(T element)
 		throw exception("This element is already in the set...Add_element funktion run into problem...");
 	else
 	{
-		if (head->next == nullptr || element < head->value)
+		if (head->next == nullptr || element < head->next->value)
 		{
-			head->next = new Node(element, head);
+			head->next = new Node(element, head->next);
 		}
 		else
 		{
