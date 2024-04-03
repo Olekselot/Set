@@ -75,8 +75,9 @@ template <typename T>
 Set<T>::Set() : head(new Node(T())), size(0) {}
 
 template<typename T>
-Set<T>::Set(const Set& S) : Set<T>(), size(S.size)
+Set<T>::Set(const Set& S) : size(S.size)
 {
+	head(new Node(T()));
 	S.head = S.head->next;
 	if (S.head == nullptr)
 		head = nullptr;
