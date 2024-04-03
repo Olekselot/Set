@@ -95,9 +95,9 @@ Set<T>::Set(const Set& S) : Set<T>(), size(S.size)
 }
 
 template<typename T>
-Set<T>::Set(T* elements, size_t n) : Set<T>(), size(0)
+Set<T>::Set(T* elements, size_t n) : head(new Node(T())), size(0)
 {
-	for (size_t i = 0; i < n; ++i)
+	for (size_t i = 1; i < n; ++i)
 	{
 		if (!is_valid(elements[i]))
 		{
