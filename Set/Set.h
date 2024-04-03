@@ -75,17 +75,16 @@ template <typename T>
 Set<T>::Set() : head(new Node(T())), size(0) {}
 
 template<typename T>
-Set<T>::Set(const Set& S) : size(S.size)
+Set<T>::Set(const Set& S) : head(new Node(T())), size(S.size)
 {
-	head(new Node(T()));
-	S.head = S.head->next;
-	if (S.head == nullptr)
-		head = nullptr;
+	
+	if (S.head->next == nullptr)
+		head->next = nullptr;
 	else
 	{
-		head->next = new Node(S.head->value);
-		Node* curr = S.head->next;
-		Node* temp = head->next;
+		head->next->next = new Node(S.head->value);
+		Node* curr = S.head->next->next;
+		Node* temp = head->next->next;
 		while (curr != nullptr)
 		{
 			temp->next = new Node(curr->value);
@@ -158,13 +157,13 @@ Set<T>& Set<T>::add_range(T* elements, size_t n)
 template<typename T>
 Set<T>& Set<T>::clear_set()
 {
-	Node* victom = head->next;
-	while (victom != nullptr)
+	Node* curr = head->next;
+	while (curr != nullptr)
 	{
-		victom = victom->next;
+		Node* victom = curr;
+		curr = curr->next;
 		delete victom;
 	}
-	head->next = nullptr;
 	this->size = 0;
 	return *this;
 }
