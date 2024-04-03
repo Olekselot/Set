@@ -82,9 +82,9 @@ Set<T>::Set(const Set& S) : head(new Node(T())), size(S.size)
 		head->next = nullptr;
 	else
 	{
-		head->next->next = new Node(S.head->value);
+		/*head->next = new Node(S.head->next->value);*/
 		Node* curr = S.head->next->next;
-		Node* temp = head->next->next;
+		Node* temp = head/*->next->next*/;
 		while (curr != nullptr)
 		{
 			temp->next = new Node(curr->value);
