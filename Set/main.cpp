@@ -18,7 +18,7 @@ int main() {
     cout << "Set 3: " << set3 << endl;
 
     cout << "Union of set1 and set 2: " << set1.set_union(set2) << endl;
-
+ 
     cout << "Intersection of set1 and set2: " << set1.set_intersect(set2) << endl;
 
     cout << "Difference of set2 and set1: " << set2.set_difference(set1) << endl;

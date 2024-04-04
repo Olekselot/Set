@@ -86,7 +86,7 @@ namespace SetTest
 			Assert::IsTrue(T.is_valid(5));
 			Assert::IsTrue(T.is_valid(1));
 
-			int other_arr[] = { 9,5,1,0 };
+			int other_arr[] = { 9,5,1 };
 			size_t m = sizeof other_arr / sizeof other_arr[0];
 			Set<int> D(other_arr, m);
 

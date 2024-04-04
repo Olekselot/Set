@@ -65,7 +65,7 @@ bool Set<T>::sets_are_equal(const Set<T>& A)
 template<typename T>
 bool Set<T>::is_empty()const
 {
-	if (head->next == nullptr)
+	if (head == nullptr)
 		return true;
 	else
 		return false;
@@ -349,7 +349,7 @@ inline Set<T> Set<T>::set_union(const Set& S) const
 		++unswer.size;
 	}
 	Node* victom = unswer.head;
-	head = head->next;
+	unswer.head = unswer.head->next;
 	delete victom;
 	return unswer;
 }
