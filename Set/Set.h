@@ -72,19 +72,18 @@ bool Set<T>::is_empty()const
 }
 
 template <typename T>
-Set<T>::Set() : head(new Node(T())), size(0) {}
+Set<T>::Set() : head(nullptr), size(0) {}
 
 template<typename T>
-Set<T>::Set(const Set& S) : head(new Node(T())), size(S.size)
+Set<T>::Set(const Set& S) : size(S.size)
 {
-	
-	if (S.head->next == nullptr)
-		head->next = nullptr;
+	if (S.head == nullptr)
+		head = nullptr;
 	else
 	{
-		/*head->next = new Node(S.head->next->value);*/
-		Node* curr = S.head->next->next;
-		Node* temp = head/*->next->next*/;
+		head = new Node(S.head->value);
+		Node* curr = S.head->next;
+		Node* temp = head;
 		while (curr != nullptr)
 		{
 			temp->next = new Node(curr->value);
@@ -95,9 +94,9 @@ Set<T>::Set(const Set& S) : head(new Node(T())), size(S.size)
 }
 
 template<typename T>
-Set<T>::Set(T* elements, size_t n) : head(new Node(T())), size(0)
+Set<T>::Set(T* elements, size_t n) : size(0)
 {
-	for (size_t i = 1; i < n; ++i)
+	for (size_t i = 0; i < n; ++i)
 	{
 		if (!is_valid(elements[i]))
 		{
@@ -105,10 +104,11 @@ Set<T>::Set(T* elements, size_t n) : head(new Node(T())), size(0)
 		}
 	}
 }
+
 template<typename T>
-Set<T>::Set(T element) :Set<T>()
+Set<T>::Set(T element)
 {
-	head->next = new Node(element);
+	head = new Node(element);
 	size = 1;
 }
 
@@ -125,13 +125,13 @@ inline Set<T>& Set<T>::add_element(T element)
 		throw exception("This element is already in the set...Add_element funktion run into problem...");
 	else
 	{
-		if (head->next == nullptr || element < head->next->value)
+		if (head == nullptr || element < head->value)
 		{
-			head->next = new Node(element, head->next);
+			head = new Node(element, head);
 		}
 		else
 		{
-			Node* curr = head->next;
+			Node* curr = head;
 			while (curr->next != nullptr && curr->next->value < element)
 				curr = curr->next;
 			curr->next = new Node(element, curr->next);
@@ -157,11 +157,10 @@ Set<T>& Set<T>::add_range(T* elements, size_t n)
 template<typename T>
 Set<T>& Set<T>::clear_set()
 {
-	Node* curr = head->next;
-	while (curr != nullptr)
+	while (head != nullptr)
 	{
-		Node* victom = curr;
-		curr = curr->next;
+		Node* victom = head;
+		head = head->next;
 		delete victom;
 	}
 	this->size = 0;
@@ -172,9 +171,10 @@ template<typename T>
 Set<T> Set<T>::set_difference(const Set& S)const
 {
 	Set<T> result;
+	result.head = new Node(T());
 	Node* result_pointer = result.head;
-	Node* this_pointer = head->next;
-	Node* S_pointer = S.head->next;
+	Node* this_pointer = head;
+	Node* S_pointer = S.head;
 	while (this_pointer != nullptr && S_pointer != nullptr)
 	{
 		if (this_pointer->value < S_pointer->value)
@@ -199,6 +199,7 @@ Set<T> Set<T>::set_difference(const Set& S)const
 		result_pointer->next = new Node(this_pointer->value);
 		result_pointer = result_pointer->next;
 		++result.size;
+
 		this_pointer = this_pointer->next;
 	}
 	Node* victom = result.head;
@@ -211,8 +212,9 @@ template<typename T>
 Set<T> Set<T>::set_sum_diff(const Set& S)const
 {
 	Set<T> result;
-	Node* this_pointer = head->next;
-	Node* S_pointer = S.head->next;
+	result.head = new Node(T());
+	Node* this_pointer = head;
+	Node* S_pointer = S.head;
 	Node* result_pointer = result.head;
 	while (this_pointer != nullptr && S_pointer != nullptr)
 	{
@@ -221,6 +223,7 @@ Set<T> Set<T>::set_sum_diff(const Set& S)const
 			result_pointer->next = new Node(this_pointer->value);
 			result_pointer = result_pointer->next;
 			++result.size;
+
 			this_pointer = this_pointer->next;
 		}
 		else if (S_pointer->value < this_pointer->value)
@@ -228,6 +231,7 @@ Set<T> Set<T>::set_sum_diff(const Set& S)const
 			result_pointer->next = new Node(S_pointer->value);
 			result_pointer = result_pointer->next;
 			++result.size;
+
 			S_pointer = S_pointer->next;
 		}
 		else if (this_pointer->value == S_pointer->value)
@@ -260,8 +264,9 @@ template <typename T>
 Set<T> Set<T>::set_intersect(const Set& S)const
 {
 	Set<T> result;
-	Node* this_pointer = head->next;
-	Node* S_pointer = S.head->next;
+	result.head = new Node(T());
+	Node* this_pointer = head;
+	Node* S_pointer = S.head;
 	Node* result_pointer = result.head;
 	while (this_pointer != nullptr && S_pointer != nullptr)
 	{
@@ -287,6 +292,7 @@ Set<T> Set<T>::set_intersect(const Set& S)const
 	delete victom;
 	return result;
 }
+
 template<typename T>
 Set<T>& Set<T>::operator=(const Set& S)
 {
@@ -303,11 +309,14 @@ Set<T>& Set<T>::operator=(const Set& S)
 	}
 	return *this;
 }
+
 template<typename T>
-inline Set<T> Set<T>::set_union(const Set& S) const {
+inline Set<T> Set<T>::set_union(const Set& S) const 
+{
 	Set<T> unswer;
-	Node* first = this->head->next;
-	Node* second = S.head->next;
+	unswer.head = new Node(T());
+	Node* first = this->head;
+	Node* second = S.head;
 	Node* third = unswer.head;
 	while (first != nullptr && second != nullptr)
 	{
@@ -339,13 +348,16 @@ inline Set<T> Set<T>::set_union(const Set& S) const {
 		third = third->next;
 		++unswer.size;
 	}
+	Node* victom = unswer.head;
+	head = head->next;
+	delete victom;
 	return unswer;
 }
 
 template<typename T>
 inline void Set<T>::write_to(std::ostream& out) const
 {
-	Node* temp = head->next;
+	Node* temp = head;
 	while (temp != nullptr)
 	{
 		out << temp->value << ' ';
@@ -391,7 +403,7 @@ inline Set<T>& Set<T>::remove(const T& x)
 template<typename T>
 bool Set<T>::is_valid(const T& x)const
 {
-	Node* curr = head->next;
+	Node* curr = head;
 	bool validness = false;
 	while (curr != nullptr && curr->value <= x)
 	{
