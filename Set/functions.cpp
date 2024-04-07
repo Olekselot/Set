@@ -15,7 +15,7 @@ enum class Product
 	Water
 };
 
-//5.1 Фундак Ю.
+//5.1 Fundak Y.
 Set<Product> products_intersection(Set<Product>* shops, size_t nof_shops)
 {
 	if (nof_shops == 0)
@@ -32,7 +32,7 @@ Set<Product> products_intersection(Set<Product>* shops, size_t nof_shops)
 	return common_products;
 }
 
-//5.2 Фундак Ю.
+//5.2 Fundak Y.
 Set<Product> products_union(Set<Product>* shops, size_t nof_shops)
 {
 	Set<Product> any_products;
