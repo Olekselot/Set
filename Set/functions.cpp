@@ -15,6 +15,47 @@ enum class Product
 	Water
 };
 
+std::ostream& operator<<(std::ostream& out, const Product& product) {
+    switch (product) {
+    case Product::Bread:
+        out << "Bread";
+        break;
+    case Product::Butter:
+        out << "Butter";
+        break;
+    case Product::Milk:
+        out << "Milk";
+        break;
+    case Product::Cheese:
+        out << "Cheese";
+        break;
+    case Product::Meat:
+        out << "Meat";
+        break;
+    case Product::Fish:
+        out << "Fish";
+        break;
+    case Product::Salt:
+        out << "Salt";
+        break;
+    case Product::Sugar:
+        out << "Sugar";
+        break;
+    case Product::Tea:
+        out << "Tea";
+        break;
+    case Product::Coffee:
+        out << "Coffee";
+        break;
+    case Product::Water:
+        out << "Water";
+        break;
+    default:
+        out << "Unknown Product";
+    }
+    return out;
+}
+
 //5.1 Fundak Y.
 Set<Product> products_intersection(Set<Product>* shops, size_t nof_shops)
 {

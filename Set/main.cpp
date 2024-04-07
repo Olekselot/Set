@@ -32,19 +32,19 @@ int main() {
     set1.remove(3);
     cout << "Set 1 after removing 3: " << set1 << endl;
 
-    Set<Product> storeAssortment[10];
+    Set<Product> shop1, shop2, shop3;
 
-    storeAssortment[0].add_element(Bread).add_element(Butter).add_element(Milk);
-    storeAssortment[1].add_element(Bread).add_element(Milk).add_element(Cheese);
-    storeAssortment[2].add_element(Bread).add_element(Butter).add_element(Milk);
-    
-    Set<Product> productUnion = storeAssortment[0];
-    for (size_t i = 1; i < 3; ++i)
-    {
-        productUnion = productUnion.set_intersect(storeAssortment[i]);
-    }
-    
-    std::cout << "Products in all the shops: " << productUnion << std::endl;
+    shop1.add_element(Product::Bread).add_element(Product::Butter).add_element(Product::Milk).add_element(Product::Cheese).add_element(Product::Tea).add_element(Product::Coffee);
+    shop2.add_element(Product::Milk).add_element(Product::Cheese).add_element(Product::Coffee).add_element(Product::Tea).add_element(Product::Sugar).add_element(Product::Salt);
+    shop3.add_element(Product::Bread).add_element(Product::Cheese).add_element(Product::Water).add_element(Product::Salt).add_element(Product::Tea).add_element(Product::Meat);
+
+    Set<Product> shops[] = { shop1,shop2,shop3 };
+    size_t n = 3;
+
+    Set<Product> union_of_shops = products_union(shops, n);
+    cout << "All the products from the shops : " << union_of_shops << endl;
+    Set<Product> intersection_of_shops = products_intersection(shops, n);
+    cout << "Products that are in all the shops: " << intersection_of_shops << endl;
 
     return 0;
 }
