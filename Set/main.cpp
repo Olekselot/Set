@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Set.h"
-#include "product.h"
+#include "functions.cpp"
 
 using namespace std;
 
