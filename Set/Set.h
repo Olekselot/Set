@@ -299,7 +299,7 @@ Set<T>& Set<T>::operator=(const Set& S)
 	if (this != &S)
 	{
 		this->clear_set();
-		size = S.size;
+		size = 0;
 		Node* curr = S.head;
 		while (curr != nullptr)
 		{

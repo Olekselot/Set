@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "..\Set\set.h"
+#include "..\Set\functions.cpp"
 #include <sstream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -253,4 +254,53 @@ namespace SetTest
 		}
 	};
 
+	TEST_CLASS(TestFunctions)
+	{
+	public:
+		TEST_METHOD(TestDigits)
+		{
+			Assert::AreEqual(1, digits(5));
+			Assert::AreEqual(3, digits(3312));
+			Assert::AreEqual(2, digits(1011010011));
+			Assert::AreEqual(9, digits(934612785));
+		}
+		TEST_METHOD(TestProductsIntersection)
+		{
+			Set<Product> shop1;
+			shop1.add_element(Product::Bread).add_element(Product::Milk).add_element(Product::Sugar);
+			Set<Product> shop2;
+			shop2.add_element(Product::Milk).add_element(Product::Bread).add_element(Product::Butter);
+			Set<Product> shop3;
+			shop3.add_element(Product::Milk).add_element(Product::Sugar).add_element(Product::Water);
+
+			Set<Product> shops[] = {shop1,shop2,shop3};
+
+			Set<Product> intersect = products_intersection(shops, 3);
+
+			Assert::IsTrue(intersect.size_of_set() == 1);
+			Assert::IsTrue(intersect.is_valid(Product::Milk));
+			Assert::IsFalse(intersect.is_valid(Product::Bread));
+		}
+		TEST_METHOD(TestProductsUnion)
+		{
+			Set<Product> shop1;
+			shop1.add_element(Product::Bread).add_element(Product::Milk).add_element(Product::Sugar);
+			Set<Product> shop2;
+			shop2.add_element(Product::Milk).add_element(Product::Bread).add_element(Product::Butter);
+			Set<Product> shop3;
+			shop3.add_element(Product::Milk).add_element(Product::Sugar).add_element(Product::Water);
+
+			Set<Product> shops[] = { shop1, shop2, shop3 };
+
+			Set<Product> unionSet = products_union(shops, 3);
+
+			Assert::IsTrue(unionSet.size_of_set() == 5);
+
+			Assert::IsTrue(unionSet.is_valid(Product::Bread));
+			Assert::IsTrue(unionSet.is_valid(Product::Butter));
+			Assert::IsTrue(unionSet.is_valid(Product::Milk));
+			Assert::IsTrue(unionSet.is_valid(Product::Sugar));
+			Assert::IsTrue(unionSet.is_valid(Product::Water));
+		}
+	};
 }

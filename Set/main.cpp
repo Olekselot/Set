@@ -40,21 +40,24 @@ int main() {
     std::cout << "Digits in " << num1 << ": " << digits(num1) << std::endl;
     std::cout << "Digits in " << num2 << ": " << digits(num2) << std::endl;
 
-    // 3.1 , 3.2
+    // 5.1 , 5.2
 
     Set<Product> shop1, shop2, shop3;
 
     shop1.add_element(Product::Bread).add_element(Product::Butter).add_element(Product::Milk).add_element(Product::Cheese).add_element(Product::Tea).add_element(Product::Coffee);
+    cout << shop1 << endl;
     shop2.add_element(Product::Milk).add_element(Product::Cheese).add_element(Product::Coffee).add_element(Product::Tea).add_element(Product::Sugar).add_element(Product::Salt);
+    cout << shop2 << endl;
     shop3.add_element(Product::Bread).add_element(Product::Cheese).add_element(Product::Water).add_element(Product::Salt).add_element(Product::Tea).add_element(Product::Meat);
+    cout << shop3 << endl;
 
     Set<Product> shops[] = { shop1,shop2,shop3 };
     size_t n = 3;
 
     Set<Product> union_of_shops = products_union(shops, n);
-    cout << "All the products from the shops : " << union_of_shops << endl;
+    cout << "All the products from the shops : " << union_of_shops << ' ' << union_of_shops.size_of_set() << endl;
     Set<Product> intersection_of_shops = products_intersection(shops, n);
-    cout << "Products that are in all the shops: " << intersection_of_shops << endl;
+    cout << "Products that are in all the shops: " << intersection_of_shops << ' ' << intersection_of_shops.size_of_set() << endl;
 
     return 0;
 }

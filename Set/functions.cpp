@@ -15,8 +15,10 @@ enum class Product
 	Water
 };
 
-std::ostream& operator<<(std::ostream& out, const Product& product) {
-    switch (product) {
+std::ostream& operator<<(std::ostream& out, const Product& product)
+{
+    switch (product)
+    {
     case Product::Bread:
         out << "Bread";
         break;
@@ -82,7 +84,7 @@ Set<Product> products_intersection(Set<Product>* shops, size_t nof_shops)
 	{
 		return Set<Product>();
 	}
-	Set<Product> common_products = shops[0];
+    Set<Product> common_products(shops[0]);
 
 	for (size_t i = 1; i < nof_shops; ++i)
 	{
@@ -99,11 +101,7 @@ Set<Product> products_union(Set<Product>* shops, size_t nof_shops)
 
 	for (size_t i = 0; i < nof_shops; ++i)
 	{
-        try
-        {
-            any_products = any_products.set_union(shops[i]);
-        }
-        catch (...){}
+        any_products = any_products.set_union(shops[i]);
 	}
 
 	return any_products;
