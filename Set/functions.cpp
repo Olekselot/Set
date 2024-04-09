@@ -56,6 +56,25 @@ std::ostream& operator<<(std::ostream& out, const Product& product) {
     return out;
 }
 
+//2 Fundak Y.
+
+int digits(int n)
+{
+    Set<int> digits; 
+
+    while (n > 0)
+    {
+        try
+        {
+            digits.add_element(n % 10);
+        }
+        catch(const std::exception& error){}
+        n /= 10;
+    }
+
+    return digits.size_of_set();
+}
+
 //5.1 Fundak Y.
 Set<Product> products_intersection(Set<Product>* shops, size_t nof_shops)
 {
@@ -80,7 +99,11 @@ Set<Product> products_union(Set<Product>* shops, size_t nof_shops)
 
 	for (size_t i = 0; i < nof_shops; ++i)
 	{
-		any_products = any_products.set_union(shops[i]);
+        try
+        {
+            any_products = any_products.set_union(shops[i]);
+        }
+        catch (...){}
 	}
 
 	return any_products;

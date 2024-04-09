@@ -32,6 +32,16 @@ int main() {
     set1.remove(3);
     cout << "Set 1 after removing 3: " << set1 << endl;
 
+    // 2
+
+    int num1 = 2024;
+    int num2 = 10110111;
+
+    std::cout << "Digits in " << num1 << ": " << digits(num1) << std::endl;
+    std::cout << "Digits in " << num2 << ": " << digits(num2) << std::endl;
+
+    // 3.1 , 3.2
+
     Set<Product> shop1, shop2, shop3;
 
     shop1.add_element(Product::Bread).add_element(Product::Butter).add_element(Product::Milk).add_element(Product::Cheese).add_element(Product::Tea).add_element(Product::Coffee);
