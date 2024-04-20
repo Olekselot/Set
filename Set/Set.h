@@ -65,10 +65,7 @@ bool Set<T>::sets_are_equal(const Set<T>& A)
 template<typename T>
 bool Set<T>::is_empty()const
 {
-	if (head == nullptr)
-		return true;
-	else
-		return false;
+	return head == nullptr;
 }
 
 template <typename T>
